@@ -21,4 +21,8 @@ public class Sprinter extends Athlete {
         return 10 + random.nextInt(10);
     }
 
+    public String toString() {
+        return "Sprinter: " + this.getName();
+    }
+
 }

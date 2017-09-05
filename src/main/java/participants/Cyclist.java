@@ -20,4 +20,8 @@ public class Cyclist extends Athlete {
         // random return 500 to 800
         return 500 + random.nextInt(300);
     }
+
+    public String toString() {
+        return "Cyclist: " + this.getName();
+    }
 }

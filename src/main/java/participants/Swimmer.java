@@ -21,4 +21,8 @@ public class Swimmer extends Athlete {
         return 100 + random.nextInt(100);
     }
 
+    public String toString() {
+        return "Swimmer: " + this.getName();
+    }
+
 }

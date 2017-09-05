@@ -23,20 +23,29 @@ public abstract class Game {
         this.result = new HashMap<>();
     }
 
-    public void startGame() {
+    public Athlete play() {
         for(Athlete athlete : athletes) {
             result.put(athlete, athlete.compete(this));
         }
         List<Map.Entry<Athlete, Integer>> entries = new ArrayList<>(result.entrySet());
-        Collections.sort(entries, new Comparator<Map.Entry<Athlete, Integer>>() {
+        entries.sort(new Comparator<Map.Entry<Athlete, Integer>>() {
             @Override
             public int compare(Map.Entry<Athlete, Integer> o1, Map.Entry<Athlete, Integer> o2) {
-                return o2.getValue() - o1.getValue();
+                return o1.getValue() - o2.getValue();
             }
         });
-        referee.award(entries.get(0).getKey(), 5); // 5 points for first place
-        referee.award(entries.get(1).getKey(), 2); // 2 points for second place
-        referee.award(entries.get(2).getKey(), 1); // 1 points for third place
+        athletes = new ArrayList<>(); // reassign the order according to the performance in the game
+        for(Map.Entry<Athlete, Integer> entry : entries) {
+            athletes.add(entry.getKey());
+        }
+        referee.award(athletes.get(0), 5); // 5 points for first place
+        referee.award(athletes.get(1), 2); // 2 points for second place
+        referee.award(athletes.get(2), 1); // 1 points for third place
+        return athletes.get(0);
+    }
+
+    public List<Athlete> getAthletes() {
+        return athletes;
     }
 
     public String getId() {
@@ -46,5 +55,14 @@ public abstract class Game {
     public Official getReferee() {
         return referee;
     }
+
+    public String toString() {
+        String msg =  "Game "+this.id + "\n referee: "+referee + "\n HighScore: \n";
+        for(Athlete athlete : athletes) {
+            msg += "   "+athlete+"\n";
+        }
+        return msg;
+    }
+
 
 }

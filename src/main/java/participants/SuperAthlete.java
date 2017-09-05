@@ -27,4 +27,8 @@ public class SuperAthlete extends Athlete {
         }
         throw new IllegalStateException("Unknown Game for SuperAthlete!");
     }
+
+    public String toString() {
+        return "SuperAthlete: " + this.getName();
+    }
 }

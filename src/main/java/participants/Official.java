@@ -27,4 +27,8 @@ public class Official extends Participant {
         return athleteScore;
     }
 
+    public String toString() {
+        return this.getName();
+    }
+
 }
